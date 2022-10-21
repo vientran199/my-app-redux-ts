@@ -31,7 +31,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Link refer
 [redux-toolkit](https://redux-toolkit.js.org/usage/usage-with-typescript).
-
+- Những effect creators phổ biến [Slide easy frontend](https://drive.google.com/drive/folders/19O60ER4y8mWK-2sMChezMkkBeNjhL8T_), [Doc](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbmU1bFhuYTN4aklpY002Yy1Kc0w1NlN0S2h0d3xBQ3Jtc0tsVlQwWDVSNTJ0WnRpUmthaDVLbFR2M3dvUlBVaHdMbUlHcEZvdk1fcE14WmVFbnB0bnVIb3FyYlV3SXhVaTJXa0hTQjhtQ1hqRjVrTEdrdGVYelo2eDJ0UzQwUmtkcE9abVJGNjZXNkRSQW13MlZhRQ&q=https%3A%2F%2Fredux-saga.js.org%2Fdocs%2Fapi%23effect-creators&v=pSyVoa-kcX8)
 ## How to create project
 
 ### `npx create-react-app my-app --template typescript`
