@@ -35,6 +35,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## How to create project
 
 ### `npx create-react-app my-app --template typescript`
+### `npm i connected_react_router`
+### `npm i history`
 
 ## Setup folder
 

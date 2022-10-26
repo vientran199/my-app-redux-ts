@@ -1,4 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
+import { push } from "connected-react-router";
 import { delay, fork, take, call, put } from "redux-saga/effects";
 import { authActions, LoginPayload } from "./authSlice";
 
@@ -6,11 +7,14 @@ function* hanleLogin(payload: LoginPayload) {
     try {
         console.log('login', payload)
         yield delay(500)
-        localStorage.setItem('acces_token', "áds")
+        localStorage.setItem('access_token', "áds")
         yield put(authActions.loginSuccess({
             id: '1',
             name: 'vien'
         }))
+
+        //redirect to admin page
+        yield put(push('/admin'))
     } catch (error) {
         yield put(authActions.loginFail('error'))
     }
@@ -19,11 +23,12 @@ function* hanleLogin(payload: LoginPayload) {
 function* handleLogout() {
     console.log('logout')
     localStorage.removeItem('access_token')
+    yield put(push('/login'))
 }
 function* watchLoginFlow() {
     while (true) { //để chạy logout, sẽ quay lại chờ login
         const isLoggedIn = localStorage.getItem('access_token')
-        if (isLoggedIn) {
+        if (!isLoggedIn) {
             const action: PayloadAction<LoginPayload> = yield take(authActions.login.type) //Chờ action login mới chạy tiếp
             yield fork(hanleLogin, action.payload)
         }
