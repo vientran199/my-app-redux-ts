@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Box, Button, CircularProgress, makeStyles, Paper, Typography } from '@material-ui/core';
-import { useAppDispatch } from 'app/hooks';
-import { authActions } from '../authSlice';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { authActions, selectLogging } from '../authSlice';
 
 const useStyles = makeStyles({
     root: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 const LoginPage = () => {
     const classes = useStyles()
     const dispatch = useAppDispatch()
-
+    const isLogging = useAppSelector(selectLogging)
     const handleLoginClick = () =>{
         dispatch(authActions.login({
             username:'',
@@ -40,9 +40,9 @@ const LoginPage = () => {
                     <Button fullWidth variant="contained" color="primary" 
                     onClick={handleLoginClick}
                     >
-                        {/* {isLogging &&  */}
+                        {isLogging && 
                         <CircularProgress size={20} color="secondary" />
-                        {/* // }  */}
+                        }
                         &nbsp; Fake Login
                     </Button>
                     <Button fullWidth variant="contained" color="primary" 

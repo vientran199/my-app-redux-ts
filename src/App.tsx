@@ -1,6 +1,8 @@
 import { NotFound, PrivateRoute } from 'components/Common';
 import { AdminLayout } from 'components/Layout';
 import LoginPage from 'features/auth/pages/LoginPage';
+import Dashboard from 'features/dashboard';
+import Student from 'features/student';
 import React from 'react';
 import {Routes,Route, Navigate} from 'react-router-dom'
 function App() {
@@ -10,7 +12,10 @@ function App() {
         <Route path='/' element={<Navigate to={'/login'} replace/>}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/admin' element={<PrivateRoute/>}>
-          <Route path='/admin' element={<AdminLayout/>}/>
+          <Route path='/admin' element={<AdminLayout/>}>
+            <Route path="/admin/dashboard" element={<Dashboard/>}/>
+            <Route path="/admin/students" element={<Student/>}/>
+          </Route>
         </Route>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
