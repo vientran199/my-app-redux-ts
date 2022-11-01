@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const axiosClient = axios.create({
-    baseURL:'http://js-post-api.herukoapp.com/api',
+    baseURL:'https://js-post-api.herukuapp.com/api',
     headers:{
         'Content-Type':'application/json'
     }

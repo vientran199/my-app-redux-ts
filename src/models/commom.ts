@@ -10,10 +10,10 @@ export interface ListResponse<T>{
 }
 
 export interface ListParams {
-    _page: number;
-    _limit: number;
-    _sort: number;
-    _order: 'asc' |'desc';
+    _page?: number;
+    _limit?: number;
+    _sort?: number;
+    _order?: 'asc' |'desc';
 
     [key:string]: any; //Nhìu giá trị nữa mình chưa biết
 }
