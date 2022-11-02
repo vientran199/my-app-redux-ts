@@ -44,3 +44,30 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 - Prettier: [prettier setup](https://prettier.io/playground/)
 + Create file .prettierrc, paste config
 - Create folder: components, constants, hooks, ultis, api
+
+### Students
+
+
+ROUTINGS
+- /admin/students: listing
+- /admin/students/add: add new student
+- /admin/students/:studentId: update a student
+
+LISTING
+
+- Search by name
+- Filter by city
+- Sort by name, mark
+- Pagination
+
+student slice state:
+- loading
+- list
+- pagination
+- filter { page: 1, limit: 10, ... }
+
+
+
+ADD/EDIT
+- React Hook Form v7 
+- Yup

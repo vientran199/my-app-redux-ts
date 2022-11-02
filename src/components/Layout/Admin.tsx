@@ -3,7 +3,7 @@ import { Box, makeStyles } from '@material-ui/core';
 import { useAppDispatch } from 'app/hooks'
 import {Header,Sidebar }from 'components/Common';
 import { authActions } from 'features/auth/authSlice'
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import Dashboard from 'features/dashboard';
 import Student from 'features/student';
 
@@ -33,11 +33,11 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export const AdminLayout = ()=>{
-    const dispatch = useAppDispatch()
-    const handleLogout = () =>{
-        dispatch(authActions.logout())
-    }
     const classes = useStyles();
+    const nav = useNavigate()
+    React.useEffect(()=>{
+      nav('/admin/dashboard')
+    },[])
     return (
         <Box className={classes.root}>
       <Box className={classes.header}>
@@ -50,10 +50,6 @@ export const AdminLayout = ()=>{
 
       <Box className={classes.main}>
         <Outlet/>
-        {/* <Routes>
-          <Route path="/admin/dashboard" element={<Dashboard/>}/>
-          <Route path="/admin/students" element={<Student/>}/>
-        </Routes> */}
       </Box>
     </Box>
     )
