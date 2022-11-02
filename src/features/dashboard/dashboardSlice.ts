@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "app/store";
 import { Student } from "models";
 
 export interface DashboardStatistics {
@@ -63,11 +64,11 @@ const dashboardSlice = createSlice({
 export const dashboardAction = dashboardSlice.actions
 
 //selector
-export const selectDashboardLoading = (state: DashboardState) => state.loading
-export const selectDashboardStatistics = (state: DashboardState) => state.statistics
-export const selectDashboardHighestStudentList = (state: DashboardState) => state.highestStudentList
-export const selectDashboardLowestStudentList = (state: DashboardState) => state.lowestStudentList
-export const selectDashboardRankingByCity = (state: DashboardState) => state.rankingByCityList
+export const selectDashboardLoading = (state: RootState) => state.dashboard.loading
+export const selectDashboardStatistics = (state: RootState) => state.dashboard.statistics
+export const selectDashboardHighestStudentList = (state: RootState) => state.dashboard.highestStudentList
+export const selectDashboardLowestStudentList = (state: RootState) => state.dashboard.lowestStudentList
+export const selectDashboardRankingByCity = (state: RootState) => state.dashboard.rankingByCityList
 
 const dashboardReducer = dashboardSlice.reducer
 export default dashboardReducer

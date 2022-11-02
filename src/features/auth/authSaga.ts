@@ -13,8 +13,7 @@ function* hanleLogin(payload: LoginPayload) {
             name: 'vien'
         }))
 
-        //redirect to admin page
-        yield put(push('/admin'))
+        yield put(push('/admin')) //redirect to admin page
     } catch (error) {
         yield put(authActions.loginFail('error'))
     }
@@ -32,9 +31,10 @@ function* watchLoginFlow() {
             const action: PayloadAction<LoginPayload> = yield take(authActions.login.type) //Chờ đến khi nhận được action login mới chạy tiếp
             yield fork(hanleLogin, action.payload)
         }
-
+        //take: tạm dùng chờ cho đến khi nhận được action mong muốn.
         yield take(authActions.logout.type) //chờ đến khi nhận được action logout mới chạy tiếp
-        yield call(handleLogout) //fork: sẽ tự chạy tiếp không chờ cho xong công việc, call: chờ xong công việc
+        yield call(handleLogout) //fork: sẽ tự chạy tiếp không chờ cho xong công việc, 
+        //call: Gọi hàm, nếu hàm return về Promise, tạm dùng saga cho đến khi xong công việc.chờ xong công việc
     }
 }
 function* checkLogin() {
