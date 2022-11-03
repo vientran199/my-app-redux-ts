@@ -40,15 +40,15 @@ const StudentTable = ({ studentList, onEdit, onRemove }: StudentTableProps) => {
                             <TableCell>{student.city}</TableCell>
                             <TableCell align="right">
                                 <Button
+                                    size="small"
                                     className={classes.edit}
-                                    variant="contained"
                                     color="primary"
                                     onClick={() => onEdit?.(student)}
                                 >
                                     Edit
                                 </Button>
 
-                                <Button variant="outlined" color="secondary" onClick={() => onRemove?.(student)}>
+                                <Button size="small" color="secondary" onClick={() => onRemove?.(student)}>
                                     Remove
                                 </Button>
                             </TableCell>
