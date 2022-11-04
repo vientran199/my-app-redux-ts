@@ -1,8 +1,9 @@
 import { Box, Button, LinearProgress, makeStyles, Typography } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
+import studentApi from 'api/studentApi';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { selectCityList, selectCityMap } from 'features/city/citySlice';
-import { ListParams } from 'models';
+import { ListParams, Student } from 'models';
 import * as React from 'react';
 import StudentFilters from '../components/StudentFilters';
 import StudentTable from '../components/StudentTable';
@@ -58,6 +59,17 @@ const ListPage = () => {
   const handleFilterChange = (newFilter: ListParams) => {
     dispatch(studentActions.setFilter(newFilter))
   }
+  const handleRemoveStudent = async(student: Student) =>{
+    try {
+      await studentApi.remove(student?.id || '')
+
+      const newFilter = {...filter}
+      dispatch(studentActions.setFilter(newFilter))
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <Box className={classes.root}>
       {loading && <LinearProgress className={classes.loading} />}
@@ -74,7 +86,7 @@ const ListPage = () => {
       </Box>
       
       {/* StudentTable */}
-      <StudentTable studentList={studentList} cityMap={cityMap}/>
+      <StudentTable studentList={studentList} cityMap={cityMap} onRemove={handleRemoveStudent}/>
 
       {/* Pagination */}
       <Box my={2} display="flex" justifyContent="center">
