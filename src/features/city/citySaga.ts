@@ -1,6 +1,6 @@
 import cityApi from "api/cityApi";
 import { City, ListResponse } from "models";
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, debounce, put, takeLatest } from "redux-saga/effects";
 import { cityActions } from "./citySlice";
 
 function* fetchCityList(){

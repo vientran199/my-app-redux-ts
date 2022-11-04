@@ -30,8 +30,6 @@ const Dashboard = () => {
 
     const classes = useStyles()
 
-    const dashboardState = useAppSelector(state => state.dashboard)
-    console.log(dashboardState)
     React.useEffect(() => {
         dispatch(dashboardAction.fetchData())
     }, [dispatch])
