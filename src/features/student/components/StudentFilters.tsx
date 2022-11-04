@@ -1,4 +1,4 @@
-import { Box, Grid, MenuItem, Select } from '@material-ui/core';
+import { Box, Button, Grid, MenuItem, Select } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -14,6 +14,9 @@ export interface StudentFiltersProps {
     onSearchChange?: (newFilter: ListParams) => void;
 }
 const StudentFilters = ({ filter, cityList, onChange, onSearchChange }: StudentFiltersProps) => {
+
+    const searchRef = React.useRef<HTMLInputElement>();
+
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!onSearchChange) return;
 
@@ -35,6 +38,38 @@ const StudentFilters = ({ filter, cityList, onChange, onSearchChange }: StudentF
         };
         onChange(newFilter);
     }
+
+    const handleSortChange = (e: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+        if (!onChange) return;
+
+        const value = e.target.value;
+        const [_sort, _order] = (value as string).split('.');
+        const newFilter: ListParams = {
+            ...filter,
+            _sort: _sort || undefined,
+            _order: (_order as 'asc' | 'desc') || undefined,
+        };
+        onChange(newFilter);
+    };
+
+    const handleClearFilter = () => {
+        if (!onChange) return;
+
+        const newFilter: ListParams = {
+            ...filter,
+            _page: 1,
+            _sort: undefined,
+            _order: undefined,
+            city: undefined,
+            name_like: undefined,
+        };
+        onChange(newFilter);
+
+        if (searchRef.current) {
+            searchRef.current.value = '';
+        }
+    };
+
     return (
         <Box>
             <Grid container spacing={3}>
@@ -70,6 +105,32 @@ const StudentFilters = ({ filter, cityList, onChange, onSearchChange }: StudentF
                             ))}
                         </Select>
                     </FormControl>
+                </Grid>
+
+                <Grid item xs={12} md={6} lg={2}>
+                    <FormControl variant="outlined" size="small" fullWidth>
+                        <InputLabel id="sortBy">Sort</InputLabel>
+                        <Select
+                            labelId="sortBy"
+                            value={filter._sort ? `${filter._sort}.${filter._order}` : ''}
+                            onChange={handleSortChange}
+                            label="Sort"
+                        >
+                            <MenuItem value="">
+                                <em>No sort</em>
+                            </MenuItem>
+
+                            <MenuItem value="name.asc">Name ASC</MenuItem>
+                            <MenuItem value="name.desc">Name DESC</MenuItem>
+                            <MenuItem value="mark.asc">Mark ASC</MenuItem>
+                            <MenuItem value="mark.desc">Mark DESC</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12} md={6} lg={1}>
+                    <Button variant="outlined" color="primary" fullWidth onClick={handleClearFilter}>
+                        Clear
+                    </Button>
                 </Grid>
             </Grid>
         </Box>
