@@ -5,7 +5,6 @@ import { call, debounce, put, takeLatest } from "redux-saga/effects"
 import {studentActions } from "./studentSlice"
 
 function* handleSearchDebounce(action: PayloadAction<ListParams>){
-    console.log(action)
     yield put(studentActions.setFilter(action.payload))
 }
 
