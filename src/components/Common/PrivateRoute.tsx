@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Navigate, Outlet, Route, RouteProps } from 'react-router-dom'
+import { Navigate, Outlet, RouteProps } from 'react-router-dom'
 
 export interface PrivateRouteProps{
 

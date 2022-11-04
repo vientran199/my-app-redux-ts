@@ -7,6 +7,7 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { history } from 'ultis';
 import dashboardReducer from 'features/dashboard/dashboardSlice';
 import studentReducer from 'features/student/studentSlice';
+import cityReducers from 'features/city/citySlice';
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   dashboard: dashboardReducer,
   student: studentReducer,
+  city: cityReducers,
 })
 const sagaMiddleware = createSagaMiddleware()
 export const store = configureStore({

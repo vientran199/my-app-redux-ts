@@ -1,5 +1,6 @@
-import { Button, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
-import { Student } from "models"
+import { Box, Button, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import { City, Student } from "models"
+import { capitalizeString, getMarkColor } from "ultis";
 
 const useStyles = makeStyles((theme) => ({
     table: {},
@@ -12,8 +13,11 @@ export interface StudentTableProps {
     studentList: Student[];
     onEdit?: (student: Student) => void;
     onRemove?: (student: Student) => void;
+    cityMap: {
+        [key: string]: City
+    }
 }
-const StudentTable = ({ studentList, onEdit, onRemove }: StudentTableProps) => {
+const StudentTable = ({ studentList, onEdit, onRemove,cityMap }: StudentTableProps) => {
     const classes = useStyles();
 
     return (
@@ -33,11 +37,15 @@ const StudentTable = ({ studentList, onEdit, onRemove }: StudentTableProps) => {
                 <TableBody>
                     {studentList.map((student) => (
                         <TableRow key={student.id}>
-                            <TableCell>{student.id}</TableCell>
+                            <TableCell width={310}>{student.id}</TableCell>
                             <TableCell>{student.name}</TableCell>
-                            <TableCell>{student.gender}</TableCell>
-                            <TableCell>{student.mark}</TableCell>
-                            <TableCell>{student.city}</TableCell>
+                            <TableCell>{capitalizeString(student.gender)}</TableCell>
+                            <TableCell>
+                                <Box color={getMarkColor(student.mark)} fontWeight="bold">
+                                    {student.mark}
+                                </Box>
+                            </TableCell>
+                            <TableCell>{cityMap[student.city]?.name}</TableCell>
                             <TableCell align="right">
                                 <Button
                                     size="small"
